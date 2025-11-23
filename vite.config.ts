@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  base: process.env.VITE_BASE || "/azan/",
+  base: "./",
   plugins: [react()],
   resolve: {
     alias: {
