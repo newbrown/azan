@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script type="text/javascript">
-      // Redirect all 404s to the index page with the path as a query parameter
-      // This allows the React Router to handle all routes on GitHub Pages
-      var pathSegments = window.location.pathname.split('/').filter(function(el) { return el.length > 0; });
-      var redirectPath = '/azan/';
-      if (pathSegments.length > 0) {
-        // If there's a path beyond /azan/, redirect with that path preserved
-        var remainingPath = '/' + pathSegments.slice(1).join('/');
-        redirectPath = '/azan/?redirect=' + encodeURIComponent(remainingPath);
+      // SPA redirect: for any 404, preserve the requested path and load index.html
+      // GitHub Pages will serve this 404.html for all missing files
+      // The React Router will handle the path client-side
+      var path = window.location.pathname;
+      
+      // Check if this is already the root (avoid infinite redirect)
+      if (path !== '/azan/') {
+        // Store the intended path in sessionStorage
+        sessionStorage.setItem('redirect_path', path);
+        // Redirect to root index
+        window.location.replace('/azan/');
       }
-      window.location.replace(redirectPath);
     </script>
   </head>
   <body>

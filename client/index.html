@@ -22,6 +22,17 @@
           document.documentElement.classList.add('dark');
         }
       })();
+
+      // Handle SPA redirect: if this page was loaded via 404.html redirect,
+      // restore the original path that the user tried to visit
+      (function() {
+        const redirectPath = sessionStorage.getItem('redirect_path');
+        if (redirectPath && redirectPath !== window.location.pathname) {
+          // Restore the path in browser history without reloading
+          window.history.replaceState(null, '', redirectPath);
+          sessionStorage.removeItem('redirect_path');
+        }
+      })();
     </script>
   </head>
   <body>
