@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Redirect all 404s to the index page with the path as a query parameter
+      // This allows the React Router to handle all routes on GitHub Pages
+      var pathSegments = window.location.pathname.split('/').filter(function(el) { return el.length > 0; });
+      var redirectPath = '/azan/';
+      if (pathSegments.length > 0) {
+        // If there's a path beyond /azan/, redirect with that path preserved
+        var remainingPath = '/' + pathSegments.slice(1).join('/');
+        redirectPath = '/azan/?redirect=' + encodeURIComponent(remainingPath);
+      }
+      window.location.replace(redirectPath);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
